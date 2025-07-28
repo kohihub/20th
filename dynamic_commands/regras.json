@@ -13,23 +13,6 @@
 
 {
   "ativador": {
-    "tipo": "time",
-    "valor": "03:05"
-  },
-  "condicoes": [
-    {
-      "tipo": "canal",
-      "id": "1303533306372952087"
-    }
-  ],
-  "efeito": {
-    "tipo": "mensagem",
-    "conteudo": "time teste"
-  }
-},
-
-{
-  "ativador": {
     "tipo": "password",
     "valor": "cala boca Eli"
   },
@@ -37,6 +20,18 @@
   "efeito": {
     "tipo": "mensagem",
     "conteudo": "Caralho, vai tomar no cú, chega lá na piranha da tua mãe e manda ela calar a boca."
+  }
+},
+  
+{
+  "ativador": {
+    "tipo": "password",
+    "valor": "meu Deus do céu não sobrou nada"
+  },
+  "condicoes": [],
+  "efeito": {
+    "tipo": "mensagem",
+    "conteudo": "https://www.youtube.com/watch?v=4cc0wimOwA8"
   }
 }
 
