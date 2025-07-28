@@ -167,7 +167,7 @@ class InteractionCog(commands.Cog):
 
 
 # Comando tijolo
-    @commands.command(name="jogar tijolo")
+    @commands.command(name="brick")
     async def brick(self, ctx, member: discord.Member):
         await self._comando_interacao(ctx, member, lick_gifs, "is launching bricks", "bricked", "brick")
 
