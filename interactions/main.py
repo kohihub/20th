@@ -166,5 +166,11 @@ class InteractionCog(commands.Cog):
         await self._comando_interacao(ctx, member, lick_gifs, "is licking", "licked", "lick")
 
 
+# Comando tijolo
+    @commands.command(name="jogar tijolo")
+    async def brick(self, ctx, member: discord.Member):
+        await self._comando_interacao(ctx, member, lick_gifs, "is launching bricks", "bricked", "brick")
+
+
 async def setup(bot: commands.Bot):
     await bot.add_cog(InteractionCog(bot))
