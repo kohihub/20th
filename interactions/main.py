@@ -12,7 +12,7 @@ class InteractionCog(commands.Cog):
 
     async def _comando_interacao(self, ctx, member: discord.Member, gifs, descricao, acao_passado, tipo):
         if member == ctx.author:
-            await ctx.send(f"Você não pode {tipo} em si mesmo, seu bobinho(a)!", delete_after=10)
+            await ctx.send(f"Está tão carente assim? kkkkkkkkkkkkk", delete_after=10)
             return
 
         gif = random.choice(gifs)
