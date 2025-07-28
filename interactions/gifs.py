@@ -214,3 +214,8 @@ lick_gifs = [
 "https://media.discordapp.net/attachments/713915066441007164/713935880372617266/dt5uXzh7BaP.gif?ex=6846ea5a&is=684598da&hm=5912192b8880631426d7bb8cef32dc0c0d8416fc409d0d6b071a4014e128eddd&=",
 "https://media.discordapp.net/attachments/713915066441007164/713935854418264104/3138TEon2ls.gif?ex=6846ea53&is=684598d3&hm=e0e82b655b4b5b3981f93c8ccc8d85b34fa8228d94d4ea710589ccafaf346e40&="
 ]
+
+brick_gifs = [
+"https://media.discordapp.net/attachments/1385315970557546508/1399432997576380439/hatsune-miku-miku.gif?ex=6888fb0a&is=6887a98a&hm=3c26436123fdab70a6c446c1c3ab0ba4c802a49f0755b563dd84005c16028900&=&width=548&height=548",
+"https://media.discordapp.net/attachments/1385315970557546508/1399433695378669780/gato-tijolo.gif?ex=6888fbb1&is=6887aa31&hm=26a84f6d526efca21f944499e1cc8d4a2a1a8e80c0f4d7463f7ee086f6ea598c&=&width=641&height=641"
+]
