@@ -6,6 +6,7 @@ import os
 from firebase_admin.firestore import Query
 import json
 import base64
+import discord
 
 
 firebase_creds_base64 = os.getenv("FIREBASE_CREDENTIALS_BASE64")
