@@ -41,14 +41,16 @@ def get_user_data(user_id):
         default_profile = {
             'level': 1,
             'xp': 0,
-            'badges': [] 
+            'badges': [],
+            'username': author.name,
+            'avatar_hash': author.display_avatar.key 
         }
         users_ref.document(str(user_id)).set(default_profile)
         return default_profile
 
-def update_user_xp(user_id):
-    user_id_str = str(user_id)
-    user_data = get_user_data(user_id_str)
+def update_user_xp(author: discord.User):
+    user_id_str = str(author.id)
+    user_data = get_user_data(author)
 
     user_data['xp'] += 15 
 
@@ -61,11 +63,15 @@ def update_user_xp(user_id):
         leveled_up = True
         print(f"[⬆️] Usuário {user_id_str} subiu para o nível {user_data['level']}!")
 
-    users_ref.document(user_id_str).update({
+    update_data = {
         'level': user_data['level'],
-        'xp': user_data['xp']
-    })
+        'xp': user_data['xp'],
+        'username': author.name,
+        'avatar_hash': author.display_avatar.key
+    }
+    users_ref.document(user_id_str).update(update_data)
     
+    user_data.update(update_data)
     return leveled_up, user_data
 
 
