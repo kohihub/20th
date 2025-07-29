@@ -1,4 +1,3 @@
-# profile_system.py
 
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -6,7 +5,6 @@ import os
 from firebase_admin.firestore import Query
 import json
 import base64
-import discord
 
 
 firebase_creds_base64 = os.getenv("FIREBASE_CREDENTIALS_BASE64")
@@ -17,7 +15,6 @@ if firebase_creds_base64:
 
     cred = credentials.Certificate(creds_dict)
 else:
-    # Plano B: Se a variável não estiver definida (para testes locais), usa o arquivo
     print("AVISO: Variável FIREBASE_CREDENTIALS_BASE64 não encontrada. Usando arquivo local firebase-credentials.json.")
     cred = credentials.Certificate("firebase-credentials.json")
 
@@ -42,16 +39,14 @@ def get_user_data(user_id):
         default_profile = {
             'level': 1,
             'xp': 0,
-            'badges': [],
-            'username': author.name,
-            'avatar_hash': author.display_avatar.key 
+            'badges': [] 
         }
         users_ref.document(str(user_id)).set(default_profile)
         return default_profile
 
-def update_user_xp(author: discord.User):
-    user_id_str = str(author.id)
-    user_data = get_user_data(author)
+def update_user_xp(user_id):
+    user_id_str = str(user_id)
+    user_data = get_user_data(user_id_str)
 
     user_data['xp'] += 15 
 
@@ -64,15 +59,11 @@ def update_user_xp(author: discord.User):
         leveled_up = True
         print(f"[⬆️] Usuário {user_id_str} subiu para o nível {user_data['level']}!")
 
-    update_data = {
+    users_ref.document(user_id_str).update({
         'level': user_data['level'],
-        'xp': user_data['xp'],
-        'username': author.name,
-        'avatar_hash': author.display_avatar.key
-    }
-    users_ref.document(user_id_str).update(update_data)
+        'xp': user_data['xp']
+    })
     
-    user_data.update(update_data)
     return leveled_up, user_data
 
 
