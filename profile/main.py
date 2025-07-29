@@ -25,7 +25,7 @@ class ProfileCog(commands.Cog):
         if message.author.bot:
             return
 
-        leveled_up, user_data = profile_system.update_user_xp(message.author)
+        leveled_up, user_data = profile_system.update_user_xp(message.author.id)
 
         if leveled_up:
             level = user_data['level']
