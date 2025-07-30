@@ -30,28 +30,20 @@ class ProfileCog(commands.Cog):
         if leveled_up:
             level = user_data['level']
 
-    # Os comandos de Perfil: /perfil, /leaderboard e /give_badge
-    # Em profile/main.py, dentro da classe ProfileCog
 
     @app_commands.command(name="perfil", description="Veja o seu perfil ou o de outro membro.")
-    # O novo parâmetro 'usuario' é opcional.
     async def perfil(self, interaction: discord.Interaction, usuario: discord.Member = None):
         await interaction.response.defer()
 
         try:
-            # --- LÓGICA PARA DECIDIR O ALVO ---
-            # Se o administrador não especificou um usuário, o alvo é quem usou o comando.
-            # Caso contrário, o alvo é o usuário mencionado.
             alvo = usuario or interaction.user
             
-            # Verificação para não tentar pegar perfil de bots
             if alvo.bot:
                 await interaction.followup.send("Bots não têm perfil! Eles são almas vazias movidas a código.", ephemeral=True)
                 return
 
             print(f"[🔃] Iniciando geração de perfil para {alvo.name}")
             
-            # A partir daqui, o código usa a variável 'alvo' em vez de 'user' ou 'interaction.user'
             print("[🔃] Buscando dados do usuário...")
             user_data = profile_system.get_user_data(alvo.id)
             level = user_data['level']
@@ -76,7 +68,6 @@ class ProfileCog(commands.Cog):
             print("[✅] Perfil enviado!")
 
         except Exception as e:
-            # ... (seu tratamento de erro continua o mesmo) ...
             print(f"[😭] Encontrei um erro!")
             print(f"ERRO: {e}")
             import traceback
