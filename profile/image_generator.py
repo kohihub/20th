@@ -63,7 +63,7 @@ async def create_profile_image(avatar_url, user_name, user_level, current_xp, xp
     
     badge_size = (32, 32)
     badge_padding = 10
-    start_x = 250
+    start_x = 255
     start_y = 80 
 
     badge_folder = os.path.join(os.path.dirname(__file__), "assets", "badges")

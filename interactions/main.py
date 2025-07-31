@@ -12,7 +12,7 @@ class InteractionCog(commands.Cog):
 
     async def _comando_interacao(self, ctx, member: discord.Member, gifs, descricao, acao_passado, tipo):
         if member == ctx.author:
-            await ctx.send(f"Você não pode {tipo} em si mesmo, seu bobinho(a)!", delete_after=10)
+            await ctx.send(f"Está tão carente assim? kkkkkkkkkkkkk", delete_after=10)
             return
 
         gif = random.choice(gifs)
@@ -164,6 +164,12 @@ class InteractionCog(commands.Cog):
     @commands.command(name="lick")
     async def lick(self, ctx, member: discord.Member):
         await self._comando_interacao(ctx, member, lick_gifs, "is licking", "licked", "lick")
+
+
+# Comando tijolo
+    @commands.command(name="brick")
+    async def brick(self, ctx, member: discord.Member):
+        await self._comando_interacao(ctx, member, brick_gifs, "is launching bricks", "bricked", "brick")
 
 
 async def setup(bot: commands.Bot):

@@ -1,4 +1,3 @@
-# profile_system.py
 
 import firebase_admin
 from firebase_admin import credentials, firestore
@@ -16,7 +15,6 @@ if firebase_creds_base64:
 
     cred = credentials.Certificate(creds_dict)
 else:
-    # Plano B: Se a variável não estiver definida (para testes locais), usa o arquivo
     print("AVISO: Variável FIREBASE_CREDENTIALS_BASE64 não encontrada. Usando arquivo local firebase-credentials.json.")
     cred = credentials.Certificate("firebase-credentials.json")
 
