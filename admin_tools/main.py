@@ -120,7 +120,7 @@ class AdminToolsCog(commands.Cog):
     @commands.command(name="ux_2735_28452")
     @commands.has_permissions(administrator=True)
     async def criar_painel_remocao_prefix(self, ctx: commands.Context):
-        ID_DO_CARGO_PARA_REMOVER = 123456789012345678 # ❗ SUBSTITUA PELO ID DO CARGO REAL
+        ID_DO_CARGO_PARA_REMOVER = 1362148726210297966 
         TEXTO_DA_MENSAGEM = "Clique no botão abaixo para deixar de ser Furry."
         TEXTO_DO_BOTAO = "Deixar cargo."
         
