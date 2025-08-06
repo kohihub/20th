@@ -145,38 +145,38 @@ class AdminToolsCog(commands.Cog):
 async def setup(bot: commands.Bot):
     await bot.add_cog(AdminToolsCog(bot))
     bot.add_view(PersistentRemoveRoleView())
-        ID_DO_CARGO_PARA_REMOVER = 123456789012345678 # ❗ SUBSTITUA PELO ID DO CARGO REAL
-        TEXTO_DA_MENSAGEM = "Clique no botão abaixo para deixar de ser Furry."
-        TEXTO_DO_BOTAO = "Deixar cargo."
+    ID_DO_CARGO_PARA_REMOVER = 123456789012345678 # ❗ SUBSTITUA PELO ID DO CARGO REAL
+    TEXTO_DA_MENSAGEM = "Clique no botão abaixo para deixar de ser Furry."
+    TEXTO_DO_BOTAO = "Deixar cargo."
         
-        cargo = ctx.guild.get_role(ID_DO_CARGO_PARA_REMOVER)
-        if not cargo:
+    cargo = ctx.guild.get_role(ID_DO_CARGO_PARA_REMOVER)
+    if not cargo:
             await ctx.send(f"Cargo não encontrado: `{ID_DO_CARGO_PARA_REMOVER}`", delete_after=15)
             return
 
-        view = PersistentRemoveRoleView()
-        button = view.children[0]
-        button.label = TEXTO_DO_BOTAO
-        button.custom_id = f"remove_role_button:{cargo.id}"
+    view = PersistentRemoveRoleView()
+    button = view.children[0]
+    button.label = TEXTO_DO_BOTAO
+    button.custom_id = f"remove_role_button:{cargo.id}"
         
-        try:
+    try:
             await ctx.message.delete()
-        except discord.Forbidden:
+    except discord.Forbidden:
             pass
         
-        await ctx.channel.send(content=TEXTO_DA_MENSAGEM, view=view)
+    await ctx.channel.send(content=TEXTO_DA_MENSAGEM, view=view)
 
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(AdminToolsCog(bot))
     # CORRIGIDO: Adicionada a view para que os botões funcionem após reinicializações
     bot.add_view(PersistentRemoveRoleView())
-        try:
-            await ctx.message.delete()
-        except discord.Forbidden:
-            print(f"[❌] Não foi possível deletar a mensagem de comando em {ctx.channel.name}")
+    try:
+        await ctx.message.delete()
+    except discord.Forbidden:
+        print(f"[❌] Não foi possível deletar a mensagem de comando em {ctx.channel.name}")
 
-        await ctx.send(mensagem, **send_kwargs)
+    await ctx.send(mensagem, **send_kwargs)
 
 
 
@@ -257,22 +257,22 @@ async def setup(bot: commands.Bot):
         TEXTO_DA_MENSAGEM = "Clique no botão abaixo para deixar de ser Furry."
         TEXTO_DO_BOTAO = "Deixar cargo."
         
-       cargo = ctx.guild.get_role(ID_DO_CARGO_PARA_REMOVER)
-        if not cargo:
+    cargo = ctx.guild.get_role(ID_DO_CARGO_PARA_REMOVER)
+    if not cargo:
             await ctx.send(f"Cargo não encontrado: `{ID_DO_CARGO_PARA_REMOVER}`", delete_after=15)
             return
 
-        view = PersistentRemoveRoleView()
-        button = view.children[0]
-        button.label = TEXTO_DO_BOTAO
-        button.custom_id = f"remove_role_button:{cargo.id}"
+    view = PersistentRemoveRoleView()
+    button = view.children[0]
+    button.label = TEXTO_DO_BOTAO
+    button.custom_id = f"remove_role_button:{cargo.id}"
         
-        try:
+    try:
             await ctx.message.delete()
-        except discord.Forbidden:
+    except discord.Forbidden:
             pass
         
-        await ctx.channel.send(content=TEXTO_DA_MENSAGEM, view=view)
+    await ctx.channel.send(content=TEXTO_DA_MENSAGEM, view=view)
 
 
 
