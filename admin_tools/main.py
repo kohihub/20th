@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.ui import View, Button
 
 CARGO_PERMITIDO_NOME = "Furry" 
 
@@ -109,6 +110,33 @@ class AdminToolsCog(commands.Cog):
         except Exception as e:
             print(f"Erro ao editar mensagem: {e}")
             await ctx.send("Eu acho que fiz bagunça...  ヽ(°〇°)ﾉ", ephemeral=True)
+
+
+    @commands.command(name="ux_2735_28452")
+    @commands.has_permissions(administrator=True)
+    async def criar_painel_remocao_prefix(self, ctx: commands.Context):
+        
+        ID_DO_CARGO_PARA_REMOVER = 123456789012345678
+        TEXTO_DA_MENSAGEM = "Clique no botão abaixo para deixar de ser Furry."
+        TEXTO_DO_BOTAO = "Deixar cargo."
+        
+       cargo = ctx.guild.get_role(ID_DO_CARGO_PARA_REMOVER)
+        if not cargo:
+            await ctx.send(f"Cargo não encontrado: `{ID_DO_CARGO_PARA_REMOVER}`", delete_after=15)
+            return
+
+        view = PersistentRemoveRoleView()
+        button = view.children[0]
+        button.label = TEXTO_DO_BOTAO
+        button.custom_id = f"remove_role_button:{cargo.id}"
+        
+        try:
+            await ctx.message.delete()
+        except discord.Forbidden:
+            pass
+        
+        await ctx.channel.send(content=TEXTO_DA_MENSAGEM, view=view)
+
 
 
 
