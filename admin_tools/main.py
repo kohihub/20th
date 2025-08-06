@@ -7,7 +7,6 @@ from discord.ui import View, Button
 CARGO_PERMITIDO_NOME = "Furry" # ❗ Lembre-se de verificar se este é o nome exato do cargo
 
 # --- A View Persistente para o Botão de Remoção ---
-# Adicionada de volta para que o comando de criar painel funcione
 class PersistentRemoveRoleView(View):
     def __init__(self):
         super().__init__(timeout=None)
@@ -46,7 +45,6 @@ class AdminToolsCog(commands.Cog):
                 await ctx.message.delete()
             except discord.Forbidden:
                 pass
-            # CORRIGIDO: Trocado ephemeral=True por delete_after=10
             await ctx.send(f"{ctx.author.mention}, Heyyy, você não trabalha aqui para usar esse comando! Quer tanto um emprego assim? Fica no meu lugar então!  ( `ε´ )", delete_after=10)
         else:
             print(f"[❌] Erro nesse comando: {error}")
@@ -91,7 +89,6 @@ class AdminToolsCog(commands.Cog):
     async def edit_command(self, ctx: commands.Context, *, novo_conteudo: str):
         if ctx.message.reference is None:
             await ctx.message.delete()
-            # CORRIGIDO: Trocado ephemeral=True por delete_after=10
             await ctx.send(f"{ctx.author.mention}, Heyyy, você precisa respoder a mensagem para eu saber o que editar! aiai, boboca... (>_<)", delete_after=10)
             return
         try:
@@ -101,11 +98,9 @@ class AdminToolsCog(commands.Cog):
         try:
             mensagem_original = await ctx.channel.fetch_message(ctx.message.reference.message_id)
         except discord.NotFound:
-            # CORRIGIDO: Trocado ephemeral=True por delete_after=10
             await ctx.send("Não consegui encontrar a mensagem que você respondeu... Ela foi deletada?  (×﹏×)", delete_after=10)
             return
         if mensagem_original.author != self.bot.user:
-            # CORRIGIDO: Trocado ephemeral=True por delete_after=10
             await ctx.send("Heyyy bobão, eu só posso editar as minhas mensagens  ┐(‘～` )┌", delete_after=10)
             return
         try:
@@ -115,20 +110,41 @@ class AdminToolsCog(commands.Cog):
                 await mensagem_original.edit(embed=embed_original)
             else:
                 await mensagem_original.edit(content=novo_conteudo)
-            # CORRIGIDO: Trocado ephemeral=True por delete_after=5
             await ctx.send("Mensagem editada hihihi, ninguém vai saber (>ᴗ•)", delete_after=5)
         except discord.Forbidden:
-            # CORRIGIDO: Trocado ephemeral=True por delete_after=10
             await ctx.send("Eu não posso fazer isso   (¬_¬ )", delete_after=10)
         except Exception as e:
             print(f"Erro ao editar mensagem: {e}")
-            # CORRIGIDO: Trocado ephemeral=True por delete_after=10
             await ctx.send("Eu acho que fiz bagunça...  ヽ(°〇°)ﾉ", delete_after=10)
 
-    # Comando para criar o painel de remoção, sem renomear
     @commands.command(name="ux_2735_28452")
     @commands.has_permissions(administrator=True)
     async def criar_painel_remocao_prefix(self, ctx: commands.Context):
+        ID_DO_CARGO_PARA_REMOVER = 123456789012345678 # ❗ SUBSTITUA PELO ID DO CARGO REAL
+        TEXTO_DA_MENSAGEM = "Clique no botão abaixo para deixar de ser Furry."
+        TEXTO_DO_BOTAO = "Deixar cargo."
+        
+        cargo = ctx.guild.get_role(ID_DO_CARGO_PARA_REMOVER)
+        if not cargo:
+            await ctx.send(f"Cargo não encontrado: `{ID_DO_CARGO_PARA_REMOVER}`", delete_after=15)
+            return
+
+        view = PersistentRemoveRoleView()
+        button = view.children[0]
+        button.label = TEXTO_DO_BOTAO
+        button.custom_id = f"remove_role_button:{cargo.id}"
+        
+        try:
+            await ctx.message.delete()
+        except discord.Forbidden:
+            pass
+        
+        await ctx.channel.send(content=TEXTO_DA_MENSAGEM, view=view)
+
+
+async def setup(bot: commands.Bot):
+    await bot.add_cog(AdminToolsCog(bot))
+    bot.add_view(PersistentRemoveRoleView())
         ID_DO_CARGO_PARA_REMOVER = 123456789012345678 # ❗ SUBSTITUA PELO ID DO CARGO REAL
         TEXTO_DA_MENSAGEM = "Clique no botão abaixo para deixar de ser Furry."
         TEXTO_DO_BOTAO = "Deixar cargo."
